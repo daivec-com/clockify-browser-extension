@@ -1,4 +1,4 @@
-/* Epic/User story/Task/Issue details button */
+/* Epic/User story/Task/Issue details button 
 clockifyButton.render('.detail-title-wrapper:not(.clockify)', {observe: true}, (elem) => {
     var link,
         projectElem = $('.us-detail .project-name'),
@@ -8,8 +8,9 @@ clockifyButton.render('.detail-title-wrapper:not(.clockify)', {observe: true}, (
 
     elem.insertBefore(link, $('.detail-title-text', elem));
 });
+*/
 
-/* Epics Dashboard */
+/* Epics Dashboard 
 clockifyButton.render('.epic-row .name:not(.clockify)', {observe: true}, (elem) => {
 
     var link,
@@ -18,8 +19,9 @@ clockifyButton.render('.epic-row .name:not(.clockify)', {observe: true}, (elem) 
     link = clockifyButton.createSmallButton(titleElem.textContent);
     elem.insertBefore(link, $('a', elem));
 });
+*/
 
-/* Backlog buttons */
+/* Backlog buttons 
 clockifyButton.render('.user-story-name:not(.clockify)', {observe: true}, (elem) => {
 
     var link,
@@ -30,8 +32,9 @@ clockifyButton.render('.user-story-name:not(.clockify)', {observe: true}, (elem)
 
     elem.insertBefore(link, $('a', elem));
 });
+*/
 
-/* Kanban buttons */
+/* Kanban buttons 
 clockifyButton.render('.kanban .card-title:not(.clockify)', {observe: true}, (elem) => {
     var link,
         refElem = $('a > span:nth-child(1)', elem),
@@ -43,8 +46,9 @@ clockifyButton.render('.kanban .card-title:not(.clockify)', {observe: true}, (el
 
     elem.insertBefore(link, $('a', elem));
 });
+*/
 
-/* Sprint Taskboard tasks buttons */
+/* Sprint Taskboard tasks buttons 
 clockifyButton.render('.taskboard .card-title:not(.clockify)', {observe: true}, (elem) => {
 
     var link,
@@ -55,9 +59,9 @@ clockifyButton.render('.taskboard .card-title:not(.clockify)', {observe: true}, 
     link.style.flexGrow = 0;
     elem.insertBefore(link, $('a', elem));
 });
+*/
 
-
-/* Issues list buttons */
+/* Issues list buttons 
 clockifyButton.render('.issues-table .row:not(.clockify)', {observe: true}, (elem) => {
     var link,
         projectElem = $('.issues-page .project-name'),
@@ -67,3 +71,27 @@ clockifyButton.render('.issues-table .row:not(.clockify)', {observe: true}, (ele
     link.style.flexGrow = 0;
     elem.insertBefore(link, $('.subject', elem));
 });
+*/
+
+setTimeout(() => {
+    clockifyButton.render('.detail-header-container:not(.clockify)', {observe: true}, (elem) => {
+        var link,
+            taskSubjectElem = $('.detail-subject', elem),
+            userstorySubjectElem = $('.task-belongs-to > a > span', elem),
+            projectSubjectElem = $('.project-name');
+        
+        var words = userstorySubjectElem.textContent.split(" ")
+        words.shift()
+        var userstorySubject =words.join(separator=" ")
+        var object = {
+            description: projectSubjectElem.textContent + " > " + userstorySubject + " > " + taskSubjectElem.textContent,
+            projectName: projectSubjectElem.textContent,
+            taskName: userstorySubject + " - " +  taskSubjectElem.textContent
+        };
+        
+        link = clockifyButton.createSmallButton(object);
+        link.style.flexGrow = 0;
+        
+        taskSubjectElem.insertBefore(link, $('a', taskSubjectElem));
+    });
+},800);
